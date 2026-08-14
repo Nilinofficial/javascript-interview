@@ -171,6 +171,36 @@ const copiedUsers6 = [...users];
 const copiedUsers7 = [...users];
 
 const sortedByNameReverse = copiedUsers7.sort((a,b) => b.name.localeCompare(a.name));
-console.log(copiedUsers7);
+// console.log(copiedUsers7);
 
-// 14. const words = ["banana", "Apple", "mango", "Orange", "grape"];
+ const words = ["banana", "Apple", "mango", "Orange", "grape"];
+
+//14. Sort these words alphabetically using localeCompare():
+
+ const wordSort =  [...words].sort((a,b) => a.localeCompare(b));
+//  console.log(wordSort);
+ 
+//  15.Sort users alphabetically by their first skill.
+
+const copiedUsers8 = [...users];
+
+  copiedUsers8.sort((a,b) => {
+          const aSkill = a.skills[0];
+          const bSkill = b.skills[0];
+
+    return aSkill.localeCompare(bSkill) 
+  })
+
+  console.log(copiedUsers8);
+  
+
+//   16.Sort users alphabetically by the name of their first project.
+
+     const SortbyFirstProject = [...users].sort((a,b) => {
+        const aProject = a.projects[0].name;
+        const bProject = b.projects[0].name;
+
+        return aProject.localeCompare(bProject)
+     })
+
+     
