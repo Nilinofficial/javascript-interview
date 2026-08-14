@@ -154,4 +154,23 @@ const usersSortedByaverageRating = copiedUsers5.sort((a, b) => {
     return bAverage - aAverage
 })
 
-console.log(usersSortedByaverageRating);
+// console.log(usersSortedByaverageRating);
+
+
+//12. Sort users alphabetically by name, A → Z.
+
+const copiedUsers6 = [...users];
+
+   const SortedByName = copiedUsers6.sort((a,b) => a.name.localeCompare(b.name));
+
+//    console.log(SortedByName);
+   
+
+// 13.Sort users in reverse alphabetical order, Z → A.
+
+const copiedUsers7 = [...users];
+
+const sortedByNameReverse = copiedUsers7.sort((a,b) => b.name.localeCompare(a.name));
+console.log(copiedUsers7);
+
+// 14. const words = ["banana", "Apple", "mango", "Orange", "grape"];
