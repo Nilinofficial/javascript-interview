@@ -146,7 +146,7 @@ const usersSortedByaverageRating = copiedUsers5.sort((a, b) => {
 
     const bTotal = b.projects.reduce((accumulator, project) => {
         return accumulator + project.rating;
-    },  0);
+    }, 0);
 
     const aAverage = aTotal / a.projects.length;
     const bAverage = bTotal / b.projects.length
@@ -161,46 +161,119 @@ const usersSortedByaverageRating = copiedUsers5.sort((a, b) => {
 
 const copiedUsers6 = [...users];
 
-   const SortedByName = copiedUsers6.sort((a,b) => a.name.localeCompare(b.name));
+const SortedByName = copiedUsers6.sort((a, b) => a.name.localeCompare(b.name));
 
 //    console.log(SortedByName);
-   
+
 
 // 13.Sort users in reverse alphabetical order, Z → A.
 
 const copiedUsers7 = [...users];
 
-const sortedByNameReverse = copiedUsers7.sort((a,b) => b.name.localeCompare(a.name));
+const sortedByNameReverse = copiedUsers7.sort((a, b) => b.name.localeCompare(a.name));
 // console.log(copiedUsers7);
 
- const words = ["banana", "Apple", "mango", "Orange", "grape"];
+const words = ["banana", "Apple", "mango", "Orange", "grape"];
 
 //14. Sort these words alphabetically using localeCompare():
 
- const wordSort =  [...words].sort((a,b) => a.localeCompare(b));
+const wordSort = [...words].sort((a, b) => a.localeCompare(b));
 //  console.log(wordSort);
- 
+
 //  15.Sort users alphabetically by their first skill.
 
 const copiedUsers8 = [...users];
 
-  copiedUsers8.sort((a,b) => {
-          const aSkill = a.skills[0];
-          const bSkill = b.skills[0];
+copiedUsers8.sort((a, b) => {
+    const aSkill = a.skills[0];
+    const bSkill = b.skills[0];
 
-    return aSkill.localeCompare(bSkill) 
-  })
+    return aSkill.localeCompare(bSkill)
+})
 
-  console.log(copiedUsers8);
-  
+// console.log(copiedUsers8);
+
 
 //   16.Sort users alphabetically by the name of their first project.
 
-     const SortbyFirstProject = [...users].sort((a,b) => {
-        const aProject = a.projects[0].name;
-        const bProject = b.projects[0].name;
+const SortbyFirstProject = [...users].sort((a, b) => {
+    const aProject = a.projects[0].name;
+    const bProject = b.projects[0].name;
 
-        return aProject.localeCompare(bProject)
-     })
+    return aProject.localeCompare(bProject)
+})
 
-     
+
+//17. Get all active users and sort them from youngest to oldest.
+
+const activeUsers2 = users.filter((user) => user.isActive);
+const sortedActiveUsers = activeUsers2.sort((a, b) => a.age - b.age)
+// console.log(sortedActiveUsers);
+
+//18. Get users who know "React" and sort them alphabetically by name.
+
+const usersKnowReact = users.filter((user) => user.skills.includes("React"));
+
+const sortUsersKnowReact = usersKnowReact.sort((a, b) => a.name.localeCompare(b.name))
+
+//    console.log(usersKnowReact);
+
+// 19. Get users who completed every project, then sort them from oldest to youngest.
+
+const usersCompletedEveryProject = users.filter((user) => user.projects.length > 0 && user.projects.every(project => project.completed));
+
+// console.log(usersCompletedEveryProject);
+
+
+const sortUsersByProjectsCompleted2 = usersCompletedEveryProject.sort((a, b) => b.age - a.age);
+// console.log(sortUsersByProjectsCompleted2);
+
+
+// 20. find users with at least one incomplete project, then sort them by incomplete-project count, highest first.
+
+const usersWithIncompleteProject = users.filter((user) => user.projects.some((pro) => pro.completed === false));
+
+//    console.log(usersWithIncompleteProject);
+
+const sortUsersWithIncompleteProject = usersWithIncompleteProject.sort((a, b) => {
+
+    const aIncomplete = a.projects.filter((project) => project.completed === false);
+    const bIncomplete = b.projects.filter((project) => project.completed === false);
+
+    return bIncomplete.length - aIncomplete.length
+
+});
+
+//    console.log(sortUsersWithIncompleteProject);
+
+
+//21. Get users whose average project rating is at least 4.2, then sort them by average rating, highest first.
+
+
+function findAverageRating(user) {
+    const totalRating = user.projects.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.rating
+    }, 0);
+    const averageRating = totalRating / (user.projects.length);
+
+    return averageRating
+}
+
+
+const usersByAverage = users.filter((user) => {
+
+    const returnedAvgRating = findAverageRating(user);
+
+    return returnedAvgRating >= 4.2
+
+});
+
+const sortedAvgRating = usersByAverage.sort((a, b) => {
+    const AreturnedAvgRating = findAverageRating(a);
+    const BreturnedAvgRating = findAverageRating(b);
+
+    return BreturnedAvgRating- AreturnedAvgRating
+})
+
+
+console.log(sortedAvgRating);
